@@ -7,6 +7,28 @@ yet seem utterly useless to others. I mainly publish this toolbox as a
 dependency for other open-source projects which I hope may be useful to other
 people.
 
+YAPTools currently includes:
+- `alphanum_sort`, a string-sorting algorithm handling numbers in a
+   human-intuitive way (created by Dave Koelle).
+
+- `check_type_validity`, a function checking that a variable is of desired
+   type and raising custom exceptions if not.
+
+- `lazyproperty`, a decorator enabling the lazy evaluation of a class property.
+
+- `logger`, a module implementing tools over those of the `logging` standard
+   library, noticeably including:
+   - `LevelsFilter`, a `logging.Filter` allowing only messages of specific
+      levels to pass.
+
+   - `LoggedObject`, an abstract class providing with serializable logging tools,
+      meaning they can be used parallely by multiprocessed instances of an object.
+
+   - `Logger`, a variant of `logging.Logger` with a simplified way to set handlers.
+
+- `pool_transform`, a function to easily distribute on multiple CPU cores
+   an axis-wise tranformation of a `pandas.DataFrame` or `pandas.Series`.
+
 
 ### User installation
 
