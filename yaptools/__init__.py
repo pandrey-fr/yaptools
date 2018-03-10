@@ -5,22 +5,23 @@
 This package provides with various utilitarian functions and classes.
 
 Functions defined here:
-    * alphanum_sort         : sort a list of strings, using integers
-                              in a human-intuitive way.
-    * check_type_validity   : check that a variable's type is as expected.
-    * lazyproperty          : decorator providing a property's lazy evaluation.
-    * pool_transform        : multiprocess an axis-wise computation
-                              on a pandas Series or DataFrame.
+    * alphanum_sort       : sort a list of strings ordering integers properly.
+    * check_type_validity : check that a variable's type is as expected.
+    * import_from_string  : import any object based on its full name.
+    * instanciate         : instanciate an object from serializable components.
+    * lazyproperty        : decorator providing a property's lazy evaluation.
+    * pool_transform      : multiprocess a pandas object axis-wise computation.
+    * onetimemethod       : prevent a method from being called more than once.
 
 Module defined here:
-    * logger                : logging tools built upon the standard library.
+    * logger              : logging tools built upon the standard library.
 """
 
 from ._utils import (
-    alphanum_sort, _alphanum_key, check_type_validity, lazyproperty,
-    pool_transform, _wrap_apply
+    alphanum_sort, _alphanum_key, check_type_validity, import_from_string,
+    instanciate, lazyproperty, pool_transform, _wrap_apply, onetimemethod
 )
 from . import logger
 
 
-__version__ = 0.1
+__version__ = '0.1.2'

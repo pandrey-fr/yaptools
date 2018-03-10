@@ -14,6 +14,11 @@ YAPTools currently includes:
 - `check_type_validity`, a function checking that a variable is of desired
    type and raising custom exceptions if not.
 
+- `import_from_string`, a function to run imports based on objects' names.
+
+- `instanciate`, a function to recursively (re)instanciate any object based on
+   serializable initialization parameters.
+
 - `lazyproperty`, a decorator enabling the lazy evaluation of a class property.
 
 - `logger`, a module implementing tools over those of the `logging` standard
@@ -26,6 +31,8 @@ YAPTools currently includes:
 
    - `Logger`, a variant of `logging.Logger` with a simplified way to set handlers.
 
+- `onetimemethod`, a decorator preventing a method to be called more than once.
+
 - `pool_transform`, a function to easily distribute on multiple CPU cores
    an axis-wise tranformation of a `pandas.DataFrame` or `pandas.Series`.
 
@@ -35,7 +42,7 @@ YAPTools currently includes:
 **Dependencies**
 
 - Python 3 (>= 3.3) &nbsp;&nbsp; -- &nbsp;&nbsp; Python 2.x is **not** supported.
-- Pandas (>= 0.20) &nbsp;&nbsp;&nbsp; -- &nbsp;&nbsp; third-party package
+- Pandas (>= 0.20) &nbsp;&nbsp; -- &nbsp;&nbsp; third-party package
   distributed under BSD 3-Clause License.
 
 **Downloading a copy of the repository**

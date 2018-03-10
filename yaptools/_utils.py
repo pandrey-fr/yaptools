@@ -60,6 +60,47 @@ def check_type_validity(instance, valid_types, varname):
         )
 
 
+def import_from_string(module, elements):
+    """Import and return elements from a module based on their names.
+
+    module   : name of the module from which to import elements (str)
+    elements : name or list of names of the elements to import
+    """
+    check_type_validity(module, str, 'module_name')
+    check_type_validity(elements, (list, str), elements)
+    lib = __import__(module, fromlist=module)
+    if isinstance(elements, str):
+        return getattr(lib, elements)
+    return tuple(getattr(lib, element) for element in elements)
+
+
+def instanciate(class_name, init_kwargs, rebuild_init=None):
+    """Instanciate an object given a class name and initial arguments.
+
+    The initialization arguments of the object to instanciate may
+    be instanciated recursively using the exact same function.
+
+    class_name   : full module and class name of the object (str)
+    init_kwargs  : dict of keyword arguments to use for instanciation
+    rebuild_init : dict associating dict of `instanciate` arguments to
+                   arguments name, used to recursively instanciate any
+                   object nececessary to instanciate the main one
+    """
+    # Check arguments validity.
+    check_type_validity(class_name, str, 'class_name')
+    check_type_validity(init_kwargs, dict, 'init_kwargs')
+    check_type_validity(rebuild_init, (type(None), dict), 'rebuild_init')
+    # Optionally instanciate init arguments, recursively.
+    if rebuild_init is not None:
+        for key, arguments in rebuild_init.items():
+            init_kwargs[key] = instanciate(**arguments)
+    # Gather the class constructor of the object to instanciate.
+    module, name = class_name.rsplit('.', 1)
+    constructor = import_from_string(module, name)
+    # Instanciate the object and return it.
+    return constructor(**init_kwargs)
+
+
 def lazyproperty(method):
     """Decorator for methods defining an attribute's one-time evaluation.
 
@@ -154,3 +195,22 @@ def pool_transform(
 def _wrap_apply(series_or_dataframe, func, **kwargs):
     """Wrap a pandas.Series or pandas.DataFrame apply(func, **kwargs) call."""
     return series_or_dataframe.apply(func, **kwargs)
+
+
+def onetimemethod(method):
+    """Decorator for methods which need to be executable only once."""
+    if not inspect.isfunction(method):
+        raise TypeError('Not a function.')
+    has_run = {}
+    @functools.wraps(method)
+    def wrapped(self, *args, **kwargs):
+        """Wrapped method being run once and only once."""
+        nonlocal has_run
+        if has_run.setdefault(id(self), False):
+            raise RuntimeError(
+                "One-time method '%s' cannot be re-run for this instance."
+                % method.__name__
+            )
+        has_run[id(self)] = True
+        return method(self, *args, **kwargs)
+    return wrapped
