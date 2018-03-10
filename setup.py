@@ -17,6 +17,7 @@ setuptools.setup(
     include_package_data=True,
     author='Paul Andrey',
     description='Yet Another Python Toolbox (YAPTools)',
+    license='MIT',
     long_description=open('README.md').read(),
     url='https://github.com/pandrey-fr/yaptools/',
     install_requires=[
