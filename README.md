@@ -16,7 +16,7 @@ YAPTools currently includes:
 
 - `import_from_string`, a function to run imports based on objects' names.
 
-- `instanciate`, a function to recursively (re)instanciate any object based on
+- `instantiate`, a function to recursively (re)instantiate any object based on
    serializable initialization parameters.
 
 - `lazyproperty`, a decorator enabling the lazy evaluation of a class property.
