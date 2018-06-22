@@ -1,18 +1,13 @@
 # coding: utf-8
 
-"""Setup for the installation of the 'yaptools' package.
-
-Installation in a virtual environment is strongly advised.
-"""
+"""Setup for the installation of the 'yaptools' package."""
 
 import setuptools
-
-import yaptools
 
 
 setuptools.setup(
     name='yaptools',
-    version=yaptools.__version__,
+    version='0.1.2',
     packages=setuptools.find_packages(),
     include_package_data=True,
     author='Paul Andrey',
